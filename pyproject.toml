@@ -8,14 +8,14 @@ readme = "README.md"
 homepage = "https://github.com/fortierq/MTGScan"
 repository = "https://github.com/fortierq/MTGScan"
 keywords = ["mtg", "scan", "OCR", "magic", "cards", "computer vision"]
-requires-python = ">=3.8"
+requires-python = "3.10.5"
 
 dependencies = [
     "symspellpy (>=6.7.0)",
     "requests (>=2.25.0)",
     "matplotlib (>=3.3.3)",
     "psutil (>=5.8.0)",
-    "numpy (>=1.19.3)",
+    "numpy (>=2.0.0)",
     "easyocr (>=1.7.2)",
 ]
 
