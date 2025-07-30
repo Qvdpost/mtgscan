@@ -87,10 +87,7 @@ class BoxTextList:
         fig, ax = plt.subplots(figsize=(img.shape[1] // 64, img.shape[0] // 64))
         ax.imshow(img, aspect='equal')
         for box, text, n in self.box_texts:
-            P = (box[0], box[1])
-            Q = (box[2], box[3])
-            R = (box[4], box[5])
-            S = (box[6], box[7])
+            P , Q, R, S = box
             x = [P[0], Q[0], Q[0], R[0], R[0], S[0], S[0], P[0]]
             y = [P[1], Q[1], Q[1], R[1], R[1], S[1], S[1], P[1]]
             line = Line2D(x, y, linewidth=3.5, color='red')

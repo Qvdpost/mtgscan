@@ -1,8 +1,14 @@
 from mtgscan.box_text import BoxTextList
+import easyocr
+import pathlib
 
 
 class OCR:
-    def image_to_box_texts(self, image: str) -> BoxTextList:
+    def __init__(self):
+        self.reader = easyocr.Reader(['ch_sim','en']) # this needs to run only once to load the model into memory
+        
+
+    def image_to_box_texts(self, image: str | pathlib.PosixPath) -> BoxTextList:
         """Apply OCR on an image containing Magic cards
 
         Parameters
@@ -15,4 +21,11 @@ class OCR:
         BoxTextList
             Texts and boxes recognized by the OCR
         """
-        raise NotImplementedError()
+        if type(image) is pathlib.PosixPath:
+            image = str(image)
+
+        analysis = self.reader.readtext(image, detail = 1)
+        box_texts = BoxTextList()
+        for line in analysis:
+            box_texts.add(line[0], line[1])
+        return box_texts

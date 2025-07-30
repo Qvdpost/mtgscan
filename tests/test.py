@@ -8,7 +8,7 @@ sys.path.insert(0, str(DIR_DATA))
 import mtgscan
 from mtgscan.box_text import BoxTextList
 import mtgscan.deck
-from mtgscan.ocr.azure import Azure
+from mtgscan.ocr.ocr import OCR
 import mtgscan.text
 
 FILE_ALL_CARDS = str(DIR_DATA / "all_cards.txt")
@@ -17,7 +17,7 @@ FILE_KEYWORDS = str(DIR_DATA / "Keywords.json")
 FORMAT = "[%(asctime)s %(filename)s:%(lineno)s:%(funcName)s()] %(message)s"
 DIR_SAMPLES = Path(__file__).parent / "samples"
 rec = mtgscan.text.MagicRecognition(FILE_ALL_CARDS, FILE_KEYWORDS, max_ratio_diff=0.25)
-ocr_all = [Azure()]
+ocr_all = [OCR()]
 errors = {str(ocr): [] for ocr in ocr_all}
 
 for sample in DIR_SAMPLES.iterdir():
@@ -48,7 +48,7 @@ for sample in DIR_SAMPLES.iterdir():
             errors_last = float("inf")
         box_texts = BoxTextList()
         if not (ocr_path / "box_texts.txt").is_file():
-            box_texts = ocr.image_to_box_texts(sample / image)
+            box_texts = ocr.image_to_box_texts(str(sample / image))
             box_texts.save(ocr_path / "box_texts.txt")
         else:
             box_texts.load(ocr_path / "box_texts.txt")
