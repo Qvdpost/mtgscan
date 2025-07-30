@@ -6,7 +6,7 @@ import pathlib
 class OCR:
     def __init__(self):
         self.reader = easyocr.Reader(['ch_sim','en']) # this needs to run only once to load the model into memory
-        
+
 
     def image_to_box_texts(self, image: str | pathlib.PosixPath) -> BoxTextList:
         """Apply OCR on an image containing Magic cards
@@ -27,5 +27,5 @@ class OCR:
         analysis = self.reader.readtext(image, detail = 1)
         box_texts = BoxTextList()
         for line in analysis:
-            box_texts.add(line[0], line[1])
+            box_texts.add([item for sublist in line[0] for item in sublist], line[1])
         return box_texts
