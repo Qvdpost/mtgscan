@@ -31,4 +31,6 @@ def load_url_or_file_or_base64(image: str) -> Image.Image:
         image = BytesIO(response.content)
     elif type(image) is str and not Path(image).exists():
         image = BytesIO(base64.b64decode(image))
+    elif type(image) is bytes:
+        image = BytesIO(image)
     return np.asarray(Image.open(image))
