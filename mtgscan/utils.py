@@ -29,6 +29,6 @@ def load_url_or_file_or_base64(image: str) -> Image.Image:
         response = requests.get(image)
         response.raise_for_status()
         image = BytesIO(response.content)
-    elif not Path(image).exists():
+    elif len(image) < 255 and not Path(image).exists():
         image = BytesIO(base64.b64decode(image))
     return np.asarray(Image.open(image))
