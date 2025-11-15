@@ -10,7 +10,7 @@ from symspellpy import SymSpell, Verbosity, editdistance
 from .box_text import BoxTextList
 from .deck import Deck, Pile
 
-URL_ALL_CARDS = "https://mtgjson.com/api/v5/VintageAtomic.json"  # URL to download card list, if needed
+URL_ALL_CARDS = "https://mtgjson.com/api/v5/AtomicCards.json"  # URL to download card list, if needed
 URL_KEYWORDS = "https://mtgjson.com/api/v5/Keywords.json"
 
 
